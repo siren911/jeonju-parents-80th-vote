@@ -29,3 +29,6 @@ yarn-error.log*
 
 # 로컬 에디터/도구 설정
 .claude/
+
+# 원본 사진 (합성 결과 og-image.png만 배포)
+public/KakaoTalk_*.jpg
