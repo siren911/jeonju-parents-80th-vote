@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="한식">
+  <rect width="128" height="128" fill="#f6efe0"/>
+  <circle cx="64" cy="66" r="34" fill="none" stroke="#cbb27c" stroke-width="3"/>
+  <circle cx="64" cy="66" r="24" fill="#fbf8f2" stroke="#cbb27c" stroke-width="2"/>
+  <circle cx="64" cy="66" r="9" fill="#8f7031"/>
+  <rect x="40" y="30" width="3" height="20" rx="1.5" fill="#8f7031"/>
+  <rect x="46" y="30" width="3" height="20" rx="1.5" fill="#8f7031"/>
+</svg>

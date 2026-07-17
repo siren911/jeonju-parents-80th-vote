@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="한우·고기">
+  <rect width="128" height="128" fill="#f6efe0"/>
+  <rect x="34" y="44" width="60" height="40" rx="10" fill="#fbf8f2" stroke="#8f7031" stroke-width="3"/>
+  <path d="M44 60h40M44 68h40" stroke="#cbb27c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M50 36c0 4-3 5-3 8M64 34c0 4-3 5-3 8M78 36c0 4-3 5-3 8" fill="none" stroke="#9dbcae" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

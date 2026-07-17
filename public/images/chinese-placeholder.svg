@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="중식">
+  <rect width="128" height="128" fill="#eef2ee"/>
+  <circle cx="64" cy="70" r="30" fill="#fbf8f2" stroke="#9dbcae" stroke-width="3"/>
+  <path d="M40 62c8 8 40 8 48 0" fill="none" stroke="#23503f" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M64 30c-6 6-6 14 0 20 6-6 6-14 0-20z" fill="#23503f"/>
+  <circle cx="52" cy="74" r="3" fill="#8f7031"/>
+  <circle cx="64" cy="78" r="3" fill="#8f7031"/>
+  <circle cx="76" cy="74" r="3" fill="#8f7031"/>
+</svg>

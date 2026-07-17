@@ -1,0 +1,31 @@
+node_modules
+dist
+dist-ssr
+*.local
+
+# 환경변수: 절대 커밋하지 않는다
+.env
+.env.*
+!.env.example
+
+# 에디터
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 로그
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# bkit 도구 상태
+.bkit/
+
+# 로컬 에디터/도구 설정
+.claude/

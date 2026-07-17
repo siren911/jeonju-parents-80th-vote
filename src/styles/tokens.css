@@ -1,0 +1,110 @@
+/*
+  디자인 토큰
+  방향: 한국 가족행사 초대장과 고급 다이닝 가이드의 중간.
+  따뜻한 아이보리 배경 + 짙은 먹색 본문 + 절제된 골드/짙은 녹색 포인트.
+  라이트 모드로 고정한다. (다크모드 미지원 — 지시서 5장 확정 사항)
+*/
+
+:root {
+  /* 배경 / 표면 */
+  --c-bg: #faf7f0;
+  --c-bg-sunken: #f3eee3;
+  --c-surface: #ffffff;
+  --c-surface-tint: #fbf8f2;
+
+  /* 글자 */
+  --c-ink: #22262b; /* 본문 먹색 */
+  --c-ink-soft: #5a6069; /* 보조 설명 */
+  --c-ink-faint: #868d97; /* 캡션 */
+  --c-ink-invert: #ffffff;
+
+  /* 포인트 */
+  --c-gold: #8f7031; /* 절제된 골드 (AA 대비 확보) */
+  --c-gold-line: #cbb27c;
+  --c-gold-bg: #f6efe0;
+  --c-green: #23503f; /* 짙은 녹색 */
+  --c-green-line: #9dbcae;
+  --c-green-bg: #eaf2ee;
+
+  /* 상태 표시 (확인됨 / 전화 확인 / 미확인) */
+  --c-ok: #23503f;
+  --c-ok-bg: #eaf2ee;
+  --c-warn: #8a5a12;
+  --c-warn-bg: #fbf0dd;
+  --c-unknown: #5f6670;
+  --c-unknown-bg: #eef0f2;
+  --c-danger: #97331f;
+  --c-danger-bg: #fbeae6;
+
+  /* 선 */
+  --c-line: #e8e2d6;
+  --c-line-strong: #d6cdbb;
+
+  /* 모서리 */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-full: 999px;
+
+  /* 그림자 (약하게) */
+  --sh-card: 0 1px 2px rgba(34, 38, 43, 0.04), 0 6px 16px rgba(34, 38, 43, 0.05);
+  --sh-raised: 0 -2px 14px rgba(34, 38, 43, 0.08);
+  --sh-sheet: 0 -8px 40px rgba(34, 38, 43, 0.18);
+
+  /* 간격 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* 글자 크기 — rem 기반이라 "글자 크게 보기"에서 일괄 확대된다 */
+  --fs-caption: 0.8125rem; /* 13px */
+  --fs-sm: 0.9375rem; /* 15px */
+  --fs-body: 1rem; /* 16px — 모바일 본문 최소 기준 */
+  --fs-lead: 1.0625rem; /* 17px */
+  --fs-name: 1.25rem; /* 20px — 식당명 최소 기준 */
+  --fs-title: 1.5rem; /* 24px */
+  --fs-hero: 1.75rem; /* 28px */
+
+  /* 터치 영역 */
+  --tap-min: 44px; /* 최소 터치 타깃 */
+  --btn-h: 48px; /* 버튼 최소 높이 */
+
+  /* 레이아웃 */
+  --wrap-max: 720px;
+  --header-h: 56px;
+
+  /* safe-area (지원 안 하는 브라우저 대비 0 폴백) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* 모션 */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 200ms;
+}
+
+/* 글자 크게 보기 토글 — 모든 치수가 rem이라 한 번에 커진다 */
+html[data-textsize='large'] {
+  font-size: 118.75%; /* 16px -> 19px */
+}
+
+/* 시스템이 모션을 줄이도록 설정한 경우 애니메이션 제거 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0.01ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

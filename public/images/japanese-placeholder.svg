@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="일식">
+  <rect width="128" height="128" fill="#eef1f4"/>
+  <rect x="30" y="74" width="68" height="10" rx="5" fill="#8f7031"/>
+  <ellipse cx="52" cy="66" rx="16" ry="12" fill="#fbf8f2" stroke="#b9433a" stroke-width="2.5"/>
+  <ellipse cx="52" cy="66" rx="7" ry="5" fill="#e2857c"/>
+  <ellipse cx="78" cy="66" rx="16" ry="12" fill="#fbf8f2" stroke="#23503f" stroke-width="2.5"/>
+  <ellipse cx="78" cy="66" rx="7" ry="5" fill="#9dbcae"/>
+</svg>

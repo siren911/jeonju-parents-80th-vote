@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="우리 가족 팔순 식사 투표">
+  <rect width="1200" height="630" fill="#faf7f0"/>
+  <rect x="40" y="40" width="1120" height="550" rx="28" fill="#ffffff" stroke="#e8e2d6" stroke-width="2"/>
+  <rect x="560" y="96" width="80" height="4" rx="2" fill="#cbb27c"/>
+  <text x="600" y="250" text-anchor="middle" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="76" font-weight="800" fill="#22262b">우리 가족의 소중한 팔순 식사</text>
+  <text x="600" y="340" text-anchor="middle" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="52" font-weight="700" fill="#8f7031">함께 골라주세요</text>
+  <text x="600" y="430" text-anchor="middle" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="34" font-weight="500" fill="#5a6069">전주 · 16명 미만 · 1인 약 10만 원 이내</text>
+  <text x="600" y="490" text-anchor="middle" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="30" font-weight="500" fill="#868d97">한식 · 중식 · 일식 · 한우 후보 비교 후 세 곳 투표</text>
+</svg>
