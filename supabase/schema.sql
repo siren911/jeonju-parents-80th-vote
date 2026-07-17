@@ -143,9 +143,10 @@ as $$
 $$;
 
 -- voter_key = sha256( 정규화이름 + PIN + event_id )
+-- ⚠ digest()는 pgcrypto(=extensions 스키마) 함수이므로 search_path에 extensions 포함
 create or replace function public.make_voter_key(p_name text, p_pin text, p_event uuid)
 returns text
-language sql immutable
+language sql immutable set search_path = public, extensions
 as $$
   select encode(
     digest(public.normalize_name(p_name) || '|' || p_pin || '|' || p_event::text, 'sha256'),
@@ -317,7 +318,8 @@ create or replace function public.submit_ballot(
   p_choices jsonb
 )
 returns jsonb
-language plpgsql volatile security definer set search_path = public
+-- ⚠ crypt()는 pgcrypto(=extensions 스키마) 함수이므로 search_path에 extensions 포함
+language plpgsql volatile security definer set search_path = public, extensions
 as $$
 declare
   v_event public.events;
@@ -519,7 +521,8 @@ $$;
 -- 관리자: 공유 행사 코드 재설정
 create or replace function public.set_access_code(p_slug text, p_new_code text)
 returns jsonb
-language plpgsql volatile security definer set search_path = public
+-- ⚠ crypt()/gen_salt()는 pgcrypto(=extensions 스키마) 함수이므로 search_path에 extensions 포함
+language plpgsql volatile security definer set search_path = public, extensions
 as $$
 begin
   if not public.is_admin() then raise exception 'not_admin'; end if;
