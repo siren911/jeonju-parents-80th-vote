@@ -12,24 +12,22 @@ import {
   fetchAdminResults,
   isAdmin as checkAdmin,
   resetBallots,
-  sendOtp,
+  signInWithPassword,
   setEventStatus,
   setFamilyMembers,
   signOut,
-  verifyOtp,
   type AdminResultRow,
   type ParticipationRow,
 } from '../lib/adminApi'
 import { downloadFile } from '../lib/share'
 
-type AuthState = 'checking' | 'anon' | 'code-sent' | 'authed-nonadmin' | 'admin'
+type AuthState = 'checking' | 'anon' | 'authed-nonadmin' | 'admin'
 
 export function AdminPage() {
   const { event, reload } = useEventData()
-  const toast = useToast()
   const [auth, setAuth] = useState<AuthState>('checking')
   const [email, setEmail] = useState('')
-  const [otp, setOtp] = useState('')
+  const [password, setPassword] = useState('')
   const [busy, setBusy] = useState(false)
   const [authError, setAuthError] = useState<string | null>(null)
 
@@ -54,30 +52,16 @@ export function AdminPage() {
     }
   }, [])
 
-  const onSendOtp = async () => {
+  const onSignIn = async () => {
     setBusy(true)
     setAuthError(null)
     try {
-      await sendOtp(email.trim())
-      setAuth('code-sent')
-      toast.show('이메일로 인증 코드를 보냈어요.')
-    } catch (e) {
-      setAuthError(e instanceof Error ? e.message : '코드를 보내지 못했어요.')
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  const onVerify = async () => {
-    setBusy(true)
-    setAuthError(null)
-    try {
-      await verifyOtp(email.trim(), otp.trim())
+      await signInWithPassword(email.trim(), password)
       const ok = await checkAdmin()
       setAuth(ok ? 'admin' : 'authed-nonadmin')
       if (!ok) setAuthError('로그인은 되었지만 관리자로 등록되지 않은 계정이에요.')
     } catch (e) {
-      setAuthError(e instanceof Error ? e.message : '인증에 실패했어요.')
+      setAuthError(e instanceof Error ? e.message : '로그인에 실패했어요.')
     } finally {
       setBusy(false)
     }
@@ -86,7 +70,7 @@ export function AdminPage() {
   const onSignOut = async () => {
     await signOut()
     setAuth('anon')
-    setOtp('')
+    setPassword('')
   }
 
   // ── 화면 분기 ─────────────────────────────────────────────────────
@@ -120,12 +104,18 @@ export function AdminPage() {
   // 로그인 폼 (anon / code-sent / authed-nonadmin)
   return (
     <AdminShell onSignOut={auth === 'authed-nonadmin' ? onSignOut : undefined}>
-      <div className="card stack">
+      <form
+        className="card stack"
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (!busy && email.includes('@') && password.length >= 1) onSignIn()
+        }}
+      >
         <div>
           <h2 className="section-title" style={{ fontSize: 'var(--fs-lead)' }}>
             관리자 로그인
           </h2>
-          <p className="section-desc">등록된 관리자 이메일로 인증 코드를 받아 로그인합니다.</p>
+          <p className="section-desc">등록된 관리자 이메일과 비밀번호로 로그인합니다.</p>
         </div>
 
         <div className="field">
@@ -137,31 +127,27 @@ export function AdminPage() {
             className="input"
             type="email"
             inputMode="email"
-            autoComplete="email"
+            autoComplete="username"
             value={email}
-            disabled={auth === 'code-sent'}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="admin@example.com"
           />
         </div>
 
-        {auth === 'code-sent' && (
-          <div className="field">
-            <label className="field__label" htmlFor="admin-otp">
-              인증 코드 6자리
-            </label>
-            <input
-              id="admin-otp"
-              className="input input--pin"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={6}
-              value={otp}
-              onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, '').slice(0, 6))}
-              placeholder="••••••"
-            />
-          </div>
-        )}
+        <div className="field">
+          <label className="field__label" htmlFor="admin-password">
+            비밀번호
+          </label>
+          <input
+            id="admin-password"
+            className="input"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호"
+          />
+        </div>
 
         {authError && (
           <Notice tone="error" icon={<AlertTriangle size={18} aria-hidden="true" />}>
@@ -169,20 +155,14 @@ export function AdminPage() {
           </Notice>
         )}
 
-        {auth === 'code-sent' ? (
-          <button className="btn btn--primary btn--block" onClick={onVerify} disabled={busy || otp.length < 6}>
-            {busy ? <span className="spinner" aria-hidden="true" /> : '로그인'}
-          </button>
-        ) : (
-          <button
-            className="btn btn--primary btn--block"
-            onClick={onSendOtp}
-            disabled={busy || !email.includes('@')}
-          >
-            {busy ? <span className="spinner" aria-hidden="true" /> : '인증 코드 받기'}
-          </button>
-        )}
-      </div>
+        <button
+          type="submit"
+          className="btn btn--primary btn--block"
+          disabled={busy || !email.includes('@') || password.length < 1}
+        >
+          {busy ? <span className="spinner" aria-hidden="true" /> : '로그인'}
+        </button>
+      </form>
     </AdminShell>
   )
 }

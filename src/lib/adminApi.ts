@@ -8,19 +8,10 @@ function codeFrom(err: unknown): string {
   return msg.includes('not_admin') ? 'not_admin' : 'unknown'
 }
 
-export async function sendOtp(email: string): Promise<void> {
+export async function signInWithPassword(email: string, password: string): Promise<void> {
   const sb = requireSupabase()
-  const { error } = await sb.auth.signInWithOtp({
-    email,
-    options: { shouldCreateUser: true },
-  })
-  if (error) throw new Error('인증 코드를 보내지 못했어요. 이메일 주소를 확인해 주세요.')
-}
-
-export async function verifyOtp(email: string, token: string): Promise<void> {
-  const sb = requireSupabase()
-  const { error } = await sb.auth.verifyOtp({ email, token, type: 'email' })
-  if (error) throw new Error('인증 코드가 올바르지 않아요. 다시 확인해 주세요.')
+  const { error } = await sb.auth.signInWithPassword({ email, password })
+  if (error) throw new Error('이메일 또는 비밀번호가 올바르지 않아요. 다시 확인해 주세요.')
 }
 
 export async function isAdmin(): Promise<boolean> {

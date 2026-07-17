@@ -52,22 +52,22 @@ https://<배포주소>/#/?c=우리집팔순2026
 
 ## 4. 관리자 계정 등록
 
-관리자는 **이메일 OTP(6자리 코드)** 로 로그인합니다. (매직링크는 HashRouter와 충돌하므로 쓰지 않습니다.)
+관리자는 **이메일 + 비밀번호** 로 로그인합니다.
+(무료 플랜은 이메일 템플릿을 못 바꿔 OTP 코드 발송이 어렵고, 매직링크는 HashRouter와
+충돌하므로, 이메일 발송이 전혀 필요 없는 비밀번호 방식을 씁니다.)
 
-1. **Authentication → Providers → Email** 에서 Email 로그인을 켭니다.
-   - "Confirm email"은 꺼도 되고, OTP 방식이면 자동으로 코드가 발송됩니다.
-2. 관리자가 될 이메일로 앱 `#/admin` 화면에서 한 번 로그인합니다.
-   (또는 **Authentication → Users → Add user**로 미리 생성)
-3. 그 사용자의 `id`(uuid)를 확인한 뒤 `admins` 테이블에 등록합니다.
+**① 관리자 사용자 만들기**
+- **Authentication → Users → Add user → Create new user**
+- 이메일과 비밀번호를 입력하고 **"Auto Confirm User"(자동 확인)** 를 켜서 생성합니다.
 
+**② admins 테이블에 등록** (SQL Editor)
 ```sql
--- 방법 A: 이메일로 바로 등록
 insert into public.admins (user_id)
 select id from auth.users where email = 'admin@example.com'
 on conflict do nothing;
 ```
 
-이제 그 계정으로 `#/admin`에서 로그인하면 관리자 기능이 열립니다.
+이제 그 이메일+비밀번호로 앱 `#/admin`에서 로그인하면 관리자 기능이 열립니다.
 
 ## 5. 보안 점검 (RLS 확인)
 
